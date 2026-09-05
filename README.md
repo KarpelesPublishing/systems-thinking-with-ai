@@ -1,20 +1,29 @@
 # Systems Thinking with AI
 
-This is a private development repository.
+*Build, test, and interrogate dynamic models with human judgment*
 
-Its first release is a general systems-modeling factory teaching reconstruction.
-It cannot execute external actions.
+Public companion repository published by Karpeles Publishing.
+
+Companion code for Python-literate analysts studying dynamic models and bounded AI review.
+The examples are teaching reconstructions, not validated operational decision systems.
+The supplied workflow has no deployment adapter or live AI-service dependency.
 
 ## Setup
 
-Requires Python 3.11 or newer and `uv`. Run commands from the repository root.
-This private snapshot is not the final reader release. Public download access and
-the book QR code are not available yet. A code license has not yet been selected.
+Requires Python 3.11 or newer and `uv`. See the
+[official uv installation instructions](https://docs.astral.sh/uv/getting-started/installation/).
+Run commands from the extracted repository root, beside `pyproject.toml` and `uv.lock`.
+For book edition 0.1.1, [download the matching ZIP](https://github.com/KarpelesPublishing/systems-thinking-with-ai/archive/refs/tags/v0.1.1.zip).
+The book QR code points to the `v0.1.1` snapshot, not the changing default branch.
+A code license has not yet been selected. Public availability does not grant an open-source
+license or additional permission to redistribute or reuse the code. Third-party data retain
+their respective source terms; see their attribution files.
 
 ```sh
 uv sync --locked
-uv run pytest
-uv run ruff check .
+uv run python -m examples.reviewed_workflow
+uv run pytest tests/test_reviewed_workflow.py
+uv run python scripts/fetch_data.py --verify
 ```
 
 To include all figure tests, use `uv sync --locked --group figures`, then
@@ -22,13 +31,21 @@ To include all figure tests, use `uv sync --locked --group figures`, then
 The six derived CSV files are included; raw downloads are not needed for offline tests.
 See [data sources and checksums](data/README.md).
 
-## Run an example
+## Start with the complete review workflow
 
-From the repository root:
+The first-run command prints deterministic JSON. It uses synthetic inputs and an authored
+illustrative proposal, not a captured live AI response. A recorded review refuses the flawed
+proposal and permits simulation of the corrected candidate. Neither authorizes external action.
 
-```sh
-uv run python -c 'from chapters.chapter_22_runtime.code.runtime import RunSettings, Runtime; from examples.hiring_pipeline import hiring_pipeline; print(Runtime(hiring_pipeline(), RunSettings("euler", dt=1.0, horizon=52)).run())'
-```
+The baseline ends with 38.673280 productive people; the corrected candidate ends with 36.421090.
+The slower response reduces overshoot but leaves a larger final shortfall. This is a tradeoff,
+not an established best hiring policy. See the [full walkthrough and worked answers](examples/workflow/README.md)
+and [expected JSON report](examples/workflow/expected_report.json).
+
+No API key is needed. Initial dependency installation may use the network; the replay does not.
+If `examples` cannot be imported, check that the terminal is in the repository root and that
+the companion copy contains `examples/reviewed_workflow.py`. A checksum failure means the data
+do not match the recorded vintage; compare with a fresh edition copy before refetching.
 
 See [example models](examples/README.md) for the three worked examples.
 These are teaching models, not validated operational decision systems.
@@ -39,9 +56,9 @@ Includes current chapter packs, shared runtime, examples, tests, derived data,
 source attribution, and figure generators with their outputs. It excludes the
 manuscript, book PDF and EPUB, raw downloads, local environments and caches,
 old Git history, and the manuscript-only figure-reference checker.
-The original working repository is unchanged. Chapter 40's capstone is a teaching
-design, not an executable pack. Public release remains subject to the
-[release policy](docs/release-policy.md), license selection, and book review fixes.
+Chapter 40 includes this small executable replay and a separate, larger service-operation design.
+The latter is not a shipped application or a report of a deployment. See the
+[release policy](docs/release-policy.md). Companion availability does not certify the book's publication readiness.
 
 Safety boundary: AI proposes and a human approves.
 
@@ -63,10 +80,11 @@ them in your own program, or invoke the same capabilities through the registry.
 Run these checks before creating or updating the private GitHub repository:
 
 ```bash
-uv sync
-uv run ruff check .
-uv run pytest
+uv sync --locked --group figures
+uv run --group figures ruff check .
+uv run --group figures pytest
 uv run python scripts/validate_skills.py
+uv run python scripts/fetch_data.py --verify
 ```
 
 A release is blocked by a failed test, invalid skill package, unsupported empirical claim, missing

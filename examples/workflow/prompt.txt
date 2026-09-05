@@ -1,0 +1,18 @@
+You are helping a Python-literate analyst review a synthetic hiring model.
+This is a teaching reconstruction, with no real organization data.
+Read synthetic_inputs.csv and the hiring structure in examples/hiring_pipeline.py.
+Use the fixture provenance instead of the example's fictional observed labels.
+The model starts with 20 productive people and zero trainees, targets 40 people,
+loses 0.01 of productive people per week, and has a first-order training delay
+with an eight-week mean. Recruiting = max(0, target - productive) * aggression.
+The baseline aggression is 0.25/week. Propose exactly one change to aggression.
+The allowed interval is 0 < aggression <= 0.5/week. Preserve all other structure.
+Return value, evidence, note, and rationale as JSON fields for a change Edit.
+Set evidence to proposed. Do not claim measured or observed evidence.
+The analyst will bind the Patch to the current ModelDocument hash locally.
+Explain the delay tradeoff and a reason your suggestion could be wrong.
+Simulation settings are Euler, dt=1 week, horizon=52 weeks, seed=0.
+Recruiting cost is an assumed USD 1000 per recruited person, excluding wages,
+training, vacancies and review labor. Do not optimize only this partial cost.
+Request human review before simulation. No external action or deployment is
+authorized. Do not call tools or services. Do not claim to have run the model.

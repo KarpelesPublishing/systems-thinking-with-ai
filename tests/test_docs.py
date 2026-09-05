@@ -13,9 +13,11 @@ def test_book_map_links_first_vertical_slice() -> None:
     assert "cases/factory-cycle/policy-proposal.yaml" in content
 
 
-def test_release_policy_keeps_repository_private() -> None:
+def test_release_policy_records_public_authorization_and_pins_book_destination() -> None:
     content = (ROOT / "docs/release-policy.md").read_text(encoding="utf-8")
 
-    assert "private" in content.lower()
+    assert "publisher authorized public repository access" in content.lower()
     assert "QR" in content
-    assert "versioned release" in content.lower()
+    assert "edition tag" in content.lower()
+    assert "do not delete or move" in content.lower()
+    assert "does not grant an open-source" in content.lower()

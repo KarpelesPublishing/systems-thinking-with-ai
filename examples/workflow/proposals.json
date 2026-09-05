@@ -1,0 +1,15 @@
+{
+  "provenance": "Illustrative authored AI proposal, not historical or live model output",
+  "flawed": {
+    "value": 0.8,
+    "evidence": "observed",
+    "note": "Illustrative unsupported claim of measured recruiting response",
+    "rationale": "Recruit faster to close the gap; illustrative flawed suggestion ignores delay and evidence provenance"
+  },
+  "corrected": {
+    "value": 0.1,
+    "evidence": "proposed",
+    "note": "Human-authored simulation candidate; no empirical validation",
+    "rationale": "Test a slower response while preserving the eight-week training delay"
+  }
+}

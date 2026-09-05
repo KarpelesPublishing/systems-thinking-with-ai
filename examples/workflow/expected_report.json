@@ -1,0 +1,109 @@
+{
+  "costs": {
+    "api_calls": 0,
+    "api_cost_usd": 0,
+    "excluded": "Wages, training, vacancies, review labor, local compute",
+    "recruiting_cost_per_person_usd_assumed": 1000
+  },
+  "limitations": [
+    "No real organization data or live AI output; no deployment approval",
+    "Illustrative review is not authentication or an external authorization system",
+    "First-order eight-week mean delay, not a fixed eight-week cohort delay",
+    "Continuous people; empty initial pipeline; fixed target and attrition",
+    "No capacity constraint, selection quality, fairness or labor-market feedback",
+    "Euler dt=1 week only; no convergence, calibration or uncertainty study",
+    "Validation checks structure, not dimensional consistency or empirical truth",
+    "Lower recruiting cost is partial accounting, not a net-benefit recommendation"
+  ],
+  "reviews": {
+    "corrected": {
+      "deployment_authorized": false,
+      "external_action_authorized": false,
+      "packet": {
+        "applied": true,
+        "diff": {
+          "added": [],
+          "changed": [
+            "aggression"
+          ],
+          "removed": []
+        },
+        "hash_after": "ffb7f3926331b99d",
+        "hash_before": "9c4f767215ef5648",
+        "problems": [],
+        "rationales": {
+          "aggression": "Test a slower response while preserving the eight-week training delay"
+        },
+        "valid": true
+      },
+      "reasons": [],
+      "reviewer": "Illustrative human review replay",
+      "simulation_authorized": true
+    },
+    "flawed": {
+      "deployment_authorized": false,
+      "external_action_authorized": false,
+      "packet": {
+        "applied": true,
+        "diff": {
+          "added": [],
+          "changed": [
+            "aggression"
+          ],
+          "removed": []
+        },
+        "hash_after": "8f5a346988ed1754",
+        "hash_before": "9c4f767215ef5648",
+        "problems": [],
+        "rationales": {
+          "aggression": "Recruit faster to close the gap; illustrative flawed suggestion ignores delay and evidence provenance"
+        },
+        "valid": true
+      },
+      "reasons": [
+        "Response must be finite and within (0, 0.5] per week",
+        "A suggestion cannot claim empirical evidence"
+      ],
+      "reviewer": "Illustrative human review replay",
+      "simulation_authorized": false
+    }
+  },
+  "runs": [
+    {
+      "aggression_per_week": 0.25,
+      "departed_people": 20.934255,
+      "final_productive_people": 38.67328,
+      "final_trainees_people": 0.495275,
+      "joined_people": 39.607536,
+      "model_hash": "9c4f767215ef5648",
+      "peak_productive_people": 47.655969,
+      "policy": "baseline",
+      "productive_balance_error": 0.0,
+      "recruited_people": 40.102811,
+      "recruiting_cost_usd": 40102.81084,
+      "trainee_balance_error": 0.0
+    },
+    {
+      "aggression_per_week": 0.1,
+      "departed_people": 17.205563,
+      "final_productive_people": 36.42109,
+      "final_trainees_people": 2.317715,
+      "joined_people": 33.626653,
+      "model_hash": "ffb7f3926331b99d",
+      "peak_productive_people": 38.648394,
+      "policy": "corrected",
+      "productive_balance_error": 0.0,
+      "recruited_people": 35.944368,
+      "recruiting_cost_usd": 35944.36837,
+      "trainee_balance_error": 0.0
+    }
+  ],
+  "settings": {
+    "dt": 1.0,
+    "horizon": 52.0,
+    "seed": 0,
+    "solver": "euler"
+  },
+  "source_unchanged": true,
+  "status": "Synthetic teaching reconstruction; simulation only"
+}

@@ -1,0 +1,6 @@
+variable_id,value,evidence,note
+productive,20,synthetic,Invented initial productive headcount; no organization data
+target,40,assumed,Teaching target in people
+attrition_rate,0.01,assumed,Constant weekly fraction; not estimated from records
+aggression,0.25,assumed,Baseline recruiting response per week
+arriving,0,assumed,Initially empty first-order training pipeline; mean delay eight weeks
