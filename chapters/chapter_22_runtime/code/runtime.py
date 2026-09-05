@@ -19,10 +19,10 @@ from chapters.chapter_21_compiler.code.compiler import evaluation_order
 class RunSettings:
     """The semantics of a run.
 
-    Chapter 19 argues these belong in the model document, on the grounds that a
-    semantic choice living in whoever ran the model is a choice nobody can
-    review. This pack keeps them here instead, so they travel with the result.
-    Chapter 20 names the disagreement rather than smoothing it.
+    The document supplies the default time step and horizon. Explicit run
+    settings override those defaults and travel with the result. Reproduction
+    requires the model document, the effective run settings, and the
+    implementation version together as a reproduction bundle.
     """
 
     solver: str = "euler"

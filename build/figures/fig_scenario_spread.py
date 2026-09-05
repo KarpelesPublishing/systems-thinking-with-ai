@@ -77,7 +77,8 @@ def main():
     ax.set_ylabel("adopters")
 
     t, y = paths["aggressive"]
-    ax.text(6.3, y[6] + 5, "aggressive, 0.60", fontsize=6.8, ha="right", va="bottom")
+    ax.text(6.3, y[6] + 5, "aggressive, 0.60", fontsize=6.8, ha="right", va="bottom",
+            bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
     t, y = paths["base"]
     ax.text(12.4, y[12] - 20, "base, 0.30", fontsize=6.8, ha="left", va="top")
     t, y = paths["cautious"]

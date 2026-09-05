@@ -62,7 +62,8 @@ def main():
             va="center")
     ax.text(5.2, 16, "lookup refuses\nbeyond 5: OutsideDomain", fontsize=6.5, ha="left",
             va="center")
-    ax.text(8.6, 6.0, "degree-5 fit,\npast the data", fontsize=6.5, ha="left", va="bottom")
+    ax.text(8.6, 6.0, "degree-5 fit,\npast the data", fontsize=6.5, ha="left", va="bottom",
+            bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
     ax.text(2.5, 4.5, "bounded between 0 and 1:\nsee inset", fontsize=6.2, ha="center",
             va="bottom", style="italic")
 

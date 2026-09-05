@@ -4,9 +4,85 @@ import importlib
 import importlib.util
 import subprocess
 import sys
-from dataclasses import asdict
+from dataclasses import asdict, replace
+from io import StringIO
 
 import pytest
+
+
+@pytest.mark.parametrize("defect", ["missing", "misspelled", "duplicate", "unexpected"])
+def test_input_row_ids_must_match_exactly(monkeypatch, defect):
+    workflow = load_workflow()
+    lines = (workflow.FIXTURES / "synthetic_inputs.csv").read_text().splitlines()
+    if defect == "missing":
+        del lines[1]
+    elif defect == "misspelled":
+        lines[1] = lines[1].replace("productive,", "productiv,")
+    elif defect == "duplicate":
+        lines.append(lines[1])
+    else:
+        lines.append("extra,1,assumed,Unexpected input")
+    monkeypatch.setattr(workflow.Path, "open", lambda *a, **kw: StringIO("\n".join(lines)))
+    with pytest.raises(ValueError, match="row IDs"):
+        workflow.build_model()
+
+
+def test_unexpected_review_field_is_rejected_before_construction():
+    workflow = load_workflow()
+    source = workflow.build_model()
+    before = source.canonical()
+    patch = workflow.Patch(source.hash(), [workflow.Edit(
+        "change", "aggression", "Unexpected field", {"value": 0.1, "surprise": 1},
+    )])
+    decision = workflow.review(source, patch)
+    assert decision["simulation_authorized"] is False
+    assert decision["packet"]["applied"] is False
+    assert "Only the recruiting response parameter is in scope" in decision["reasons"]
+    assert source.canonical() == before
+
+
+@pytest.mark.parametrize("balance", ["productive_balance_error", "trainee_balance_error"])
+def test_balances_use_document_initial_state(monkeypatch, balance):
+    workflow = load_workflow()
+    source = workflow.build_model()
+    source = replace(source, variables=[
+        replace(v, value=25.0) if v.id == "productive" else
+        replace(v, value=2.0) if v.id == "arriving" else v
+        for v in source.variables
+    ])
+    monkeypatch.setattr(workflow, "build_model", lambda: source)
+    for row in workflow.run_workflow()["runs"]:
+        assert row[balance] == 0.0
+
+
+def test_52_week_report_matches_independent_euler_recurrence():
+    workflow = load_workflow()
+    for row, aggression in zip(workflow.run_workflow()["runs"], [0.25, 0.1], strict=True):
+        productive, trainees, peak = 20.0, 0.0, 20.0
+        recruited = joined = departed = 0.0
+        for _ in range(52):
+            recruiting = max(0.0, 40.0 - productive) * aggression
+            joining = trainees / 8.0
+            leaving = productive * 0.01
+            productive, trainees = (
+                productive + joining - leaving,
+                trainees + recruiting - joining,
+            )
+            peak = max(peak, productive)
+            recruited += recruiting
+            joined += joining
+            departed += leaving
+        expected = {
+            "final_productive_people": productive,
+            "peak_productive_people": peak,
+            "final_trainees_people": trainees,
+            "recruited_people": recruited,
+            "joined_people": joined,
+            "departed_people": departed,
+            "recruiting_cost_usd": recruited * 1000,
+        }
+        for key, value in expected.items():
+            assert row[key] == pytest.approx(value, rel=0, abs=0.00000051)
 
 
 def load_workflow():

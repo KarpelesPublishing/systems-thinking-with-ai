@@ -17,7 +17,13 @@ FIXTURES = Path(__file__).with_name("workflow")
 def build_model() -> ModelDocument:
     """Reuse hiring structure, replacing fictional provenance with fixture labels."""
     with (FIXTURES / "synthetic_inputs.csv").open(newline="") as handle:
-        rows = {row["variable_id"]: row for row in csv.DictReader(handle)}
+        inputs = list(csv.DictReader(handle))
+    required = {"productive", "target", "attrition_rate", "aggression", "arriving"}
+    ids = [row["variable_id"] for row in inputs]
+    if len(ids) != len(set(ids)) or set(ids) != required:
+        raise ValueError("CSV row IDs must contain each required ID exactly once: "
+                         + ", ".join(sorted(required)))
+    rows = {row["variable_id"]: row for row in inputs}
     variables: list[Variable] = []
     for variable in hiring_pipeline().variables:
         if variable.id in rows:
@@ -49,15 +55,17 @@ def corrected_proposal(source: ModelDocument) -> Patch:
 
 def review(source: ModelDocument, patch: Patch) -> dict:
     """Replay a teaching review rule, not a real person's signature or permission."""
-    packet = review_packet(source, patch)
     reasons = []
-    if not packet.get("valid", False):
-        reasons.append("Patch does not apply or pass document validation")
     if len(patch.edits) != 1 or any(
         e.operation != "change" or e.variable_id != "aggression"
         or set(e.fields) - {"value", "evidence", "note"} for e in patch.edits
     ):
         reasons.append("Only the recruiting response parameter is in scope")
+        packet = {"applied": False, "reason": reasons[-1]}
+    else:
+        packet = review_packet(source, patch)
+        if not packet.get("valid", False):
+            reasons.append("Patch does not apply or pass document validation")
     for edit in patch.edits:
         value = edit.fields.get("value")
         if (isinstance(value, bool) or not isinstance(value, (int, float))
@@ -93,6 +101,9 @@ def run_workflow() -> dict:
         left = sum(result.series["leaving"][:-1]) * dt
         final = result.final("productive")
         trainees = result.final("arriving__level")
+        initial_productive = float(model.by_id("productive").value)
+        arriving = model.by_id("arriving")
+        initial_trainees = float(arriving.value or 0.0) * float(arriving.delay_time)
         numeric = {
             "aggression_per_week": result.final("aggression"),
             "final_productive_people": final,
@@ -102,8 +113,8 @@ def run_workflow() -> dict:
             "joined_people": joined,
             "departed_people": left,
             "recruiting_cost_usd": recruited * 1000,
-            "productive_balance_error": final - (20 + joined - left),
-            "trainee_balance_error": trainees - (recruited - joined),
+            "productive_balance_error": final - (initial_productive + joined - left),
+            "trainee_balance_error": trainees - (initial_trainees + recruited - joined),
         }
         runs.append({"policy": label, "model_hash": model.hash(),
                      **{k: round(v, 6) if abs(v) > 1e-10 else 0.0
