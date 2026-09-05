@@ -1,6 +1,6 @@
 # Systems Thinking with AI
 
-*Build, test, and interrogate dynamic models with human judgment*
+*Build, test, and interrogate dynamic models with human approval*
 
 Public companion repository published by Karpeles Publishing.
 
