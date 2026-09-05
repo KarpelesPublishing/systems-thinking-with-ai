@@ -1,0 +1,39 @@
+model_id: factory-cycle
+capability: stock-flow
+time_unit: month
+time_step: 0.25
+parameters:
+  order_rate: 10.0
+  desired_coverage: 2.0
+  inventory_adjustment_time: 1.0
+  production_delay: 4.0
+stocks:
+  - name: inventory
+    initial_value: 12.0
+    unit: units
+  - name: work_in_process
+    initial_value: 40.0
+    unit: units
+auxiliaries:
+  - name: desired_inventory
+    expression: order_rate * desired_coverage
+    unit: units
+  - name: inventory_gap
+    expression: desired_inventory - inventory
+    unit: units
+flows:
+  - name: start_production
+    expression: max(0, order_rate + inventory_gap / inventory_adjustment_time)
+    source: null
+    target: work_in_process
+    unit: units/month
+  - name: complete_production
+    expression: work_in_process / production_delay
+    source: work_in_process
+    target: inventory
+    unit: units/month
+  - name: ship_orders
+    expression: order_rate
+    source: inventory
+    target: null
+    unit: units/month

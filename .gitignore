@@ -1,0 +1,19 @@
+.venv/
+.env
+.env.*
+*.pem
+*.key
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+proposals/
+artifacts/local/
+.DS_Store
+dist/
+# The Python build artifact directory, not build/figures, which holds the book's
+# figure pipeline and its committed PNG and PDF outputs.
+/build/lib/
+/build/bdist*/
+*.egg-info/
+data/raw/

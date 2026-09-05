@@ -1,0 +1,2 @@
+# Preserve dataset bytes so the recorded checksums survive checkout on every platform.
+data/**/*.csv -text

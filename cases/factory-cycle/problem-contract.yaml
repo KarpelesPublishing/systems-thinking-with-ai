@@ -1,0 +1,36 @@
+artifact_id: factory-cycle-problem
+title: Factory cycle teaching reconstruction
+decision: Compare inventory-adjustment rules in a simulated system.
+decision_owner: Reader acting in a simulated learning environment
+stakeholders:
+  - operations manager
+  - workers
+  - customers
+time_horizon: 24 months
+reference_behavior: Inventory, work in process, and production can overshoot after adjustment.
+variables:
+  - name: inventory
+    unit: units
+    observation: Simulated finished-goods stock.
+  - name: work_in_process
+    unit: units
+    observation: Simulated production pipeline stock.
+  - name: start_production
+    unit: units/month
+    assumption: This flow represents an aggregate production-start decision.
+assumptions:
+  - The model is a teaching reconstruction and not an empirical forecast.
+capabilities:
+  - stock-flow
+evidence_mode: teaching_reconstruction
+evidence: []
+constraints:
+  - Treat the result as a teaching model, not an empirical forecast.
+prohibited_objectives:
+  - Do not execute an external policy from this case.
+authority_boundary: A human must approve canonical artifacts or external pilots.
+success_criteria:
+  - The model validates, simulates, and produces a replay record.
+review_requirements:
+  - A human reviewer must inspect the model, verification result, and policy proposal.
+state: proposed

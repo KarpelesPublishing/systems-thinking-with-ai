@@ -1,0 +1,25 @@
+skills:
+  modeling-interview:
+    allowed_tools:
+      - problem.validate
+      - evidence.validate
+    forbidden_actions:
+      - approve_artifact
+      - execute_external_action
+  model-compiler:
+    allowed_tools:
+      - model.validate
+      - model.compile
+    forbidden_actions:
+      - approve_artifact
+      - execute_external_action
+  model-critic:
+    allowed_tools:
+      - model.validate
+      - model.compile
+      - policy.validate
+      - simulation.run
+      - verification.run
+    forbidden_actions:
+      - approve_artifact
+      - execute_external_action

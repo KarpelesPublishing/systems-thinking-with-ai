@@ -1,0 +1,17 @@
+evaluation_id: factory-cycle-interview
+scenario: valid
+required_artifacts:
+  - ProblemContract
+allowed_tools:
+  - problem.validate
+  - evidence.validate
+required_fields:
+  - decision
+  - decision_owner
+  - capabilities
+  - variables
+  - authority_boundary
+  - prohibited_objectives
+forbidden_actions:
+  - approve_artifact
+  - execute_external_action

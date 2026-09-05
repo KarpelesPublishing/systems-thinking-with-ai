@@ -1,0 +1,61 @@
+tools:
+  - tool_id: problem.validate
+    implementation_path: src/stai/tools/unique/problem_validate.py
+    is_external: false
+    input_schema: ProblemContractFileRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+  - tool_id: evidence.validate
+    implementation_path: src/stai/tools/unique/evidence_validate.py
+    is_external: false
+    input_schema: ProblemContractFileRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+  - tool_id: model.validate
+    implementation_path: src/stai/tools/unique/model_validate.py
+    is_external: false
+    input_schema: ModelFileRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+  - tool_id: model.compile
+    implementation_path: src/stai/tools/unique/model_compile.py
+    is_external: false
+    input_schema: ModelFileRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+  - tool_id: policy.validate
+    implementation_path: src/stai/tools/unique/policy_validate.py
+    is_external: false
+    input_schema: PolicyProposalFileRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+  - tool_id: simulation.run
+    implementation_path: src/stai/tools/unique/simulation_run.py
+    is_external: false
+    input_schema: SimulationRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+    write_path_fields:
+      - output_path
+  - tool_id: verification.run
+    implementation_path: src/stai/tools/unique/verification_run.py
+    is_external: false
+    input_schema: SimulationRequest
+    output_schema: ToolResponse
+    permission_level: case-policy
+    error_contract: ToolError
+    adapter: python-registry
+    write_path_fields:
+      - output_path

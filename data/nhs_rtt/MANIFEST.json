@@ -1,0 +1,20 @@
+{
+ "case": "nhs_rtt",
+ "source_url": "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2026/08/RTT-Overview-Timeseries-Including-Estimates-for-Missing-Trusts-Jun26-XLS-116K-6jPlxd.xlsx",
+ "landing_page": "https://www.england.nhs.uk/statistics/statistical-work-areas/rtt-waiting-times/",
+ "licence": "Open Government Licence v3.0",
+ "attribution": "Contains public sector information licensed under the Open Government Licence v3.0.",
+ "retrieved": "2026-09-03",
+ "vintage": "2007-08 to 2026-06, commissioner basis, release named in source_url",
+ "fetch_command": "uv run python scripts/fetch_data.py nhs-rtt",
+ "raw_file": "RTT-Overview-Timeseries-Including-Estimates-for-Missing-Trusts-Jun26-XLS-116K-6jPlxd.xlsx",
+ "raw_sha256": "ad523bcb7ea1f2588bc3e0ba15880c8c72bfeb096a0159263aefece86d6ee1e9",
+ "files": [
+  {
+   "path": "rtt_national_monthly.csv",
+   "sha256": "bed7bf200c555c53828c7ef73223d804c3ba9ddffa3fb29ff99ca22d2d6020d0",
+   "bytes": 16641,
+   "rows": 227
+  }
+ ]
+}

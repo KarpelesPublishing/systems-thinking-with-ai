@@ -1,0 +1,12 @@
+case_id: factory-cycle
+allowed_tools:
+  - problem.validate
+  - evidence.validate
+  - model.validate
+  - model.compile
+  - policy.validate
+  - simulation.run
+  - verification.run
+write_roots:
+  - experiments/factory-cycle
+allow_external_actions: false

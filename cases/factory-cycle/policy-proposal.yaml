@@ -1,0 +1,10 @@
+proposal_id: factory-cycle-slower-inventory-adjustment
+model_id: factory-cycle
+objective: Explore a slower inventory-adjustment rule in the teaching model.
+constraints:
+  - Treat this as a simulated proposal only.
+  - Do not execute a real-world policy.
+proposed_changes:
+  inventory_adjustment_time: 2.0
+state: proposed
+external_execution_requested: false

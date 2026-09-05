@@ -1,0 +1,16 @@
+{
+ "case": "bls_jolts",
+ "source_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/",
+ "licence": "Public domain (United States federal government work); the Bureau of Labor Statistics requests attribution",
+ "retrieved": "2026-09-03",
+ "vintage": "BLS public API v2 data as published on 2026-09-03, 2015-01 to 2024-12, seasonally adjusted",
+ "fetch_command": "uv run python scripts/fetch_data.py bls-jolts",
+ "files": [
+  {
+   "path": "jolts_monthly.csv",
+   "sha256": "fd4acf0c00e661402a63eec241a287ba5a0421e84e8031399634d8770fbcae1e",
+   "bytes": 5242,
+   "rows": 120
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "case": "fred_capacity",
+ "source_url": [
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MCUMFN",
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CAPB50001S",
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=IPMAN",
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=PCUOMFGOMFG"
+ ],
+ "producers": "Federal Reserve Board, G.17 Industrial Production and Capacity Utilization (MCUMFN, CAPB50001S, IPMAN); Bureau of Labor Statistics, Producer Price Index (PCUOMFGOMFG). Retrieved through FRED, Federal Reserve Bank of St. Louis.",
+ "licence": "United States federal works, public domain",
+ "retrieved": "2026-09-03",
+ "vintage": "FRED download of 2026-09-03; record 1972-01 to 2026-07",
+ "fetch_command": "uv run python scripts/fetch_data.py fred-capacity",
+ "files": [
+  {
+   "path": "capacity_monthly.csv",
+   "sha256": "10d2dc560923e5a6a04ce0e0bbd068ec37d59e1bd9e86f35ae754ec58b9e3764",
+   "bytes": 27453,
+   "rows": 655
+  }
+ ]
+}

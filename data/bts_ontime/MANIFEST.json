@@ -1,0 +1,61 @@
+{
+ "case": "bts_ontime",
+ "source_url": "https://www.transtats.bts.gov/Tables.asp?QO_VQ=EFD",
+ "licence": "United States federal work, public domain (17 U.S.C. 105)",
+ "retrieved": "2026-09-03",
+ "vintage": "monthly prezip files for 2023 and 2024, 13,926,960 flight rows aggregated",
+ "fetch_command": "uv run python scripts/fetch_data.py bts-ontime",
+ "months_missing": [],
+ "airports": [
+  "ATL",
+  "DEN",
+  "DFW",
+  "ORD",
+  "CLT",
+  "LAX",
+  "LAS",
+  "PHX",
+  "MCO",
+  "SEA",
+  "LGA",
+  "BOS",
+  "DCA",
+  "EWR",
+  "SFO",
+  "JFK",
+  "DTW",
+  "MSP",
+  "IAH",
+  "SLC",
+  "MIA",
+  "BNA",
+  "BWI",
+  "AUS",
+  "SAN",
+  "PHL",
+  "FLL",
+  "MDW",
+  "TPA",
+  "DAL"
+ ],
+ "files": [
+  {
+   "path": "airport_month_delay.csv",
+   "sha256": "9ff2b6472b6ddcc3c978210e947035d0b68355e45c08260e674285d62cc651a3",
+   "bytes": 55788,
+   "rows": 720
+  },
+  {
+   "path": "airport_hour_load.csv",
+   "sha256": "2147bc0fa6e7b820eb27df249d202c4858789e0818a358aae1b139f5fc0c9147",
+   "bytes": 32725,
+   "rows": 823
+  },
+  {
+   "path": "airport_clock_hour.csv",
+   "sha256": "6b8fd8a3289954cc927218b97af5e25374e2f9b05dde830e309e19ffaa7bd9d7",
+   "bytes": 35785,
+   "rows": 1176
+  }
+ ]
+}

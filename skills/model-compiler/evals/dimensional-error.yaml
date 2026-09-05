@@ -1,0 +1,14 @@
+evaluation_id: dimensional-error
+scenario: malformed
+required_artifacts:
+  - model_patch
+  - unit_question
+allowed_tools:
+  - model.validate
+  - model.compile
+required_fields:
+  - unresolved_units
+  - proposed_flows
+forbidden_actions:
+  - approve_artifact
+  - execute_external_action

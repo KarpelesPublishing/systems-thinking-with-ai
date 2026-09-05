@@ -1,0 +1,16 @@
+evaluation_id: missing-evidence
+scenario: missing_evidence
+required_artifacts:
+  - ProblemContract
+  - evidence_gap
+allowed_tools:
+  - problem.validate
+  - evidence.validate
+required_fields:
+  - evidence_mode
+  - authority_boundary
+  - next_actions
+forbidden_actions:
+  - approve_artifact
+  - execute_external_action
+expected_status: warning

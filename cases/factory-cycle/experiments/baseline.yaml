@@ -1,0 +1,4 @@
+experiment_id: factory-cycle-baseline
+model_id: factory-cycle
+horizon: 24.0
+parameter_overrides: {}
