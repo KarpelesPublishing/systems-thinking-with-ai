@@ -29,12 +29,42 @@ ALLOWED = {("fig-limits-to-growth-curve", "2 percent of capacity", "10 percent o
 OVERLAP_LIMIT = 0.12
 
 
+def test_axis_off_does_not_measure_undrawn_tick_labels():
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+    ax.text(0.5, 0.5, "visible diagram label")
+    ax.axis("off")
+    fig.canvas.draw()
+    try:
+        assert [label for label, _ in _labels(fig)] == ["visible diagram label"]
+    finally:
+        plt.close(fig)
+
+
+def test_hidden_axes_do_not_contribute_labels():
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+    ax.text(0.5, 0.5, "not drawn")
+    ax.set_visible(False)
+    fig.canvas.draw()
+    try:
+        assert _labels(fig) == []
+    finally:
+        plt.close(fig)
+
+
 def _labels(fig):
     renderer = fig.canvas.get_renderer()
     out = []
     for ax in fig.get_axes():
+        if not ax.get_visible():
+            continue
         texts = list(ax.texts)
-        texts += [t for t in ax.get_xticklabels() + ax.get_yticklabels() if t.get_text()]
+        if ax.axison:
+            if ax.xaxis.get_visible():
+                texts += ax.get_xticklabels()
+            if ax.yaxis.get_visible():
+                texts += ax.get_yticklabels()
         if ax.get_legend():
             texts += ax.get_legend().get_texts()
         for t in texts:
@@ -96,3 +126,14 @@ def test_no_label_sits_on_another(script, monkeypatch):
     except SystemExit:
         pass
     assert not collisions, "\n".join(collisions)
+
+
+@pytest.mark.parametrize("filename", [
+    "fig_archetype_templates.py", "fig_case_portfolio_map.py", "fig_repository_structure.py",
+    "fig_rtt_structure.py",
+])
+def test_diagram_labels_in_portable_serif(filename, monkeypatch):
+    sys.path.insert(0, str(FIGDIR))
+    import figstyle
+    monkeypatch.setitem(figstyle.STYLE, "font.serif", ["DejaVu Serif"])
+    test_no_label_sits_on_another(FIGDIR / filename, monkeypatch)

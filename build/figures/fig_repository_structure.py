@@ -68,7 +68,7 @@ def main():
     x0, cw, y0, rh = 2.6, 1.8, 3.6, 0.62
     for j, (name, sub) in enumerate(ARTIFACTS):
         cx = x0 + j * cw + cw / 2
-        stock(ax, cx, 4.5, name, w=cw - 0.15, h=0.8, sublabel=sub, fontsize=6.4)
+        stock(ax, cx, 4.5, name, w=cw - 0.15, h=0.8, sublabel=sub, fontsize=5.0)
     for i, role in enumerate(ROLES):
         cy = y0 - i * rh - rh / 2
         ax.text(x0 - 0.15, cy, role, ha="right", va="center", fontsize=6.6)

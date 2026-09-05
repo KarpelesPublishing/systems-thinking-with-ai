@@ -51,7 +51,7 @@ def main():
     stock(ax, 7.9, 0.0, "long_waiters", w=2.0, h=0.75, sublabel="over 52 weeks")
     cloud(ax, 10.7, 0.0)
     flow(ax, (0.75, 0.0), (2.2, 0.0))
-    ax.text(1.30, 0.34, "referrals", ha="center", va="bottom", fontsize=6.4)
+    ax.text(1.05, 0.34, "referrals", ha="center", va="bottom", fontsize=6.4)
     flow(ax, (4.2, 0.0), (6.9, 0.0), double=True)
     ax.text(5.55, 0.36, "aging_in, after a delay", ha="center", va="bottom", fontsize=6.4)
     flow(ax, (8.9, 0.0), (10.35, 0.0))

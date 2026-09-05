@@ -13,8 +13,8 @@ The supplied workflow has no deployment adapter or live AI-service dependency.
 Requires Python 3.11 or newer and `uv`. See the
 [official uv installation instructions](https://docs.astral.sh/uv/getting-started/installation/).
 Run commands from the extracted repository root, beside `pyproject.toml` and `uv.lock`.
-For book edition 0.1.2, [download the matching ZIP](https://github.com/KarpelesPublishing/systems-thinking-with-ai/archive/refs/tags/v0.1.2.zip).
-The book QR code points to the `v0.1.2` snapshot, not the changing default branch.
+For book edition 0.1.3, [download the matching ZIP](https://github.com/KarpelesPublishing/systems-thinking-with-ai/archive/refs/tags/v0.1.3.zip).
+The book QR code points to the `v0.1.3` snapshot, not the changing default branch.
 A code license has not yet been selected. Public availability does not grant an open-source
 license or additional permission to redistribute or reuse the code. Third-party data retain
 their respective source terms; see their attribution files.

@@ -39,8 +39,9 @@ BANDS = {1: "teaching design", 2: "documented structure,\nillustrative numbers",
          3: "fitted to a public record"}
 UP, DOWN = (0, 0.17, "center"), (0, -0.18, "center")
 OFFSETS = {
-    "Bathtub": UP, "Workforce learning": DOWN, "Bass diffusion": UP, "GE employment swing": DOWN,
-    "Beer game": UP, "Commodity cycle": UP, "Hospital flow": DOWN,
+    "Bathtub": UP, "Workforce learning": DOWN, "Bass diffusion": UP,
+    "GE employment swing": (0, -0.32, "center"),
+    "Beer game": (0, 0.31, "center"), "Commodity cycle": UP, "Hospital flow": DOWN,
     "Service growth trap": UP, "Technical debt": DOWN, "AI operations": UP,
     "Congestion curve": UP, "Hiring pipeline": DOWN, "Elective backlog": UP, "Capacity cycle": DOWN,
 }
@@ -61,6 +62,7 @@ def main():
     ax.set_xticks([1, 2, 3, 3.5])
     ax.set_xticklabels(["one stock", "two loops", "several stocks", "coupled\nthrough delay"],
                        fontsize=6.5)
+    ax.get_xticklabels()[2].set_ha("right")
     ax.set_xlim(0.6, 3.8)
     ax.set_ylim(0.55, 3.45)
     ax.set_xlabel("structure the case carries")

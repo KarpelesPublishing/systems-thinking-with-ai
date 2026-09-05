@@ -55,7 +55,9 @@ TEMPLATES = {
         "curves": {("symptom", "quick fix"): 0.5, ("quick fix", "symptom"): 0.5,
                    ("symptom", "fundamental fix"): -0.5, ("fundamental fix", "symptom"): -0.5,
                    ("quick fix", "capability"): 0.3, ("capability", "fundamental fix"): 0.3},
-        "ids": [(1.95, 1.5, "B", "cw"), (4.05, 1.5, "B", "cw"), (3.0, 0.7, "R", "cw")],
+        "ids": [(1.95, 1.5, "B", "cw"), (3.95, 1.5, "B", "cw"), (3.0, 0.7, "R", "cw")],
+        "font_sizes": {"fundamental fix": 5.2},
+        "sign_gaps": {("quick fix", "capability"): 0.4},
         "expect": (1, 2),
     },
     "fixes that fail": {
@@ -128,7 +130,7 @@ def main():
         ax.axis("off")
         ax.set_title(name, fontsize=7.2, pad=1)
         for node, (x, y) in t["pos"].items():
-            text_node(ax, x, y, node, fontsize=6.2)
+            text_node(ax, x, y, node, fontsize=t.get("font_sizes", {}).get(node, 6.2))
         for item in t["links"]:
             key = (item.source, item.target)
             target = t["pos"][item.target]
@@ -139,6 +141,7 @@ def main():
             causal(ax, t["pos"][item.source], target,
                    "+" if item.polarity > 0 else "-", curve=t["curves"][key],
                    delay=bool(item.delayed), shrinkB=shrink_b,
+                   sign_gap=t.get("sign_gaps", {}).get(key, 0.2),
                    sign_side=t.get("sides", {}).get(key))
         for x, y, tag, direction in t["ids"]:
             loop_id(ax, x, y, tag, direction=direction, r=0.2, fontsize=6.4)
