@@ -8,6 +8,13 @@ Companion code for Python-literate analysts studying dynamic models and bounded 
 The examples are teaching reconstructions, not validated operational decision systems.
 The supplied workflow has no deployment adapter or live AI-service dependency.
 
+## Companion notebooks and skills
+
+Interactive chapter pages: https://karpeles.com/companions/systems-thinking-with-ai/
+
+- `notebooks/`: one executed Jupyter notebook per companion chapter. Each runs on its own with NumPy and Matplotlib (`pip install numpy matplotlib jupyterlab`, then `jupyter lab`). GitHub shows the saved figures and results without running anything.
+- `skills/systems-thinking-guide/` and `skills/st-NN-*/`: a master skill that finds the right chapter for a question, plus one skill per chapter. To use one, copy its folder into `~/.claude/skills/` or your agent's skills folder.
+
 ## Setup
 
 Requires Python 3.11 or newer and `uv`. See the
